@@ -46,7 +46,11 @@ const DataService = {
     getDocument: async (_collection, _doc_id) => {
         try {
             const doc = await db.collection(_collection).doc(_doc_id).get();
-            return new Response(false, "Get Document Successfully", doc.data())
+            if (doc.data()) {
+                return new Response(false, "Get Document Successfully", doc.data())
+            } else {
+                return new Response(true, "No Document Found", {})
+            }
         }
         catch (e) {
             return new Response(true, `Get Document Faild , ${e.message}`, e)

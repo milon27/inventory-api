@@ -1,5 +1,3 @@
-const { https } = require('firebase-functions')
-
 require('dotenv').config()
 const express = require('express')
 const app = express()
@@ -22,10 +20,7 @@ app.use('/api/v1', require('./api/router/dataRouter'))
 app.use('/api/auth', require('./api/router/authRouter'))
 app.use('/api/order', require('./api/router/orderRouter'))
 
-
-exports.inventoryApi = https.onRequest(app)
-
-// const port = process.env.PORT || 2828;
-// app.listen(port, () => {
-//     console.log(`server running on port ${port}`);
-// })
+const port = process.env.PORT || 2828;
+app.listen(port, () => {
+    console.log(`server running on port ${port}`);
+})

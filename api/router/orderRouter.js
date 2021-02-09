@@ -12,7 +12,12 @@ router.post('/new', async (req, res) => {
         //console.log("req= ", data);
         const id = DataService.getId(Define.order_collection)
 
-        //const p_list = JSON.parse(data.product_list)
+        let p_list = []
+        if (process.env.NODE_ENV == "development") {
+            p_list = JSON.parse(data.product_list)
+        } else {
+            p_list = data.product_list
+        }
 
         const obj = {
             id: id,
@@ -24,7 +29,7 @@ router.post('/new', async (req, res) => {
         }
         // console.log("order : ", obj);
         //res.json(obj)
-        res.json(await DataService.batchWriteDec(obj, data.product_list))//product_list
+        res.json(await DataService.batchWriteDec(obj, p_list))//product_list
     } catch (e) {
         res.json(new Response(true, `Add Order Faild,${e.message}`, e))
     }
