@@ -41,21 +41,7 @@ const AuthService = {
             return new Response(true, `User Login Faild , ${e.message}`, e)
         }
     },
-    DeleteUser: async (uid) => {
-        try {
-            //create the user
-            await admin
-                .auth()
-                .deleteUser(uid)
-            //delet from database
-            await DataService.deleteDocument(Define.user_collection, uid)
-
-            return new Response(false, "User Deleted Successfully", { uid })
-        }
-        catch (e) {
-            return new Response(true, `User Deletion Faild , ${e.message}`, e)
-        }
-    }
+     
 }
 
 module.exports = AuthService

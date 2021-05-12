@@ -13,7 +13,7 @@ router.post('/new', async (req, res) => {
         const id = DataService.getId(Define.order_collection)
 
         let p_list = []
-        if (process.env.NODE_ENV == "development") {
+        if (process.env.NODE_ENV === "development") {
             p_list = JSON.parse(data.product_list)
         } else {
             p_list = data.product_list
